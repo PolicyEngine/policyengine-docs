@@ -4,9 +4,8 @@
 
 set -e
 
-# Install mystmd and ensure it's in PATH
-pip install mystmd
-export PATH="$HOME/.local/bin:$PATH"
+# Install mystmd via npm (it's a Node.js tool)
+npm install -g mystmd
 
 # Create output directory
 mkdir -p dist
@@ -28,7 +27,7 @@ for entry in "${REPOS[@]}"; do
 
   # Build docs
   cd "tmp_$output_name/$docs_path"
-  python -m mystmd build --html
+  myst build --html
 
   # Copy to output
   cp -r _build/html "../../dist/$output_name"
