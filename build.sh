@@ -4,8 +4,9 @@
 
 set -e
 
-# Install mystmd
+# Install mystmd and ensure it's in PATH
 pip install mystmd
+export PATH="$HOME/.local/bin:$PATH"
 
 # Create output directory
 mkdir -p dist
@@ -27,7 +28,7 @@ for entry in "${REPOS[@]}"; do
 
   # Build docs
   cd "tmp_$output_name/$docs_path"
-  myst build --html
+  python -m mystmd build --html
 
   # Copy to output
   cp -r _build/html "../../dist/$output_name"
