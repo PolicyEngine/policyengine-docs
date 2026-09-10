@@ -20,6 +20,10 @@ This repo aggregates Jupyter Book 2 (MyST) documentation from multiple PolicyEng
 Each MyST build receives its own `BASE_URL` (for example,
 `/spm-calculator`) so navigation and assets resolve under that site's mount.
 The build checks SPM page links and assets before completing.
+It installs MyST 1.7.1 in a temporary local directory, builds all sites into
+fresh output, and replaces generated site directories only after validation.
+`dist/source-manifest.json` records the actual cloned commit for each site,
+the MyST and Node versions, and hashes of the aggregator build sources.
 
 ## Adding a new project
 
@@ -41,6 +45,11 @@ Then update the index.html in the build script.
 node scripts/check-spm-links.mjs dist
 # Then serve dist/ with any static server
 ```
+
+Run the isolated, network-free build lifecycle regression with
+`node --test tests/build.test.mjs`. It checks replacement of stale pages and
+assets, preservation of existing output on a build failure, source manifest
+identities, and preservation of unrelated files.
 
 ## Deployment
 
