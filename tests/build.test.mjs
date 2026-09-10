@@ -22,6 +22,16 @@ test("repeated builds replace generated output and retain actual source identiti
   const fixture = mkdtempSync(join(tmpdir(), "docs-builder-"));
   try {
     cpSync(join(repository, "build.sh"), join(fixture, "build.sh"));
+    cpSync(join(repository, "vercel.json"), join(fixture, "vercel.json"));
+    const vercelConfig = JSON.parse(
+      readFileSync(join(fixture, "vercel.json"), "utf8"),
+    );
+    assert.equal(
+      vercelConfig.installCommand,
+      "",
+      "Vercel must skip the obsolete dashboard installer",
+    );
+    assert.equal(vercelConfig.buildCommand, "bash build.sh");
     cpSync(join(repository, "scripts"), join(fixture, "scripts"), {
       recursive: true,
     });
@@ -116,6 +126,10 @@ fi
     const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
     assert.equal(manifest.toolchain.myst, "v1.7.1");
     assert.equal(manifest.toolchain.node, process.version);
+    assert.ok(
+      manifest.aggregator_source_sha256["vercel.json"],
+      "the manifest must bind the hosted build configuration",
+    );
     assert.equal(manifest.sites.length, 3);
     assert.ok(manifest.sites.every((site) => site.commit === "2".repeat(40)));
     for (const [file, hash] of Object.entries(

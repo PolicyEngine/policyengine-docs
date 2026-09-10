@@ -24,6 +24,7 @@ const sites = readFileSync(join(workspace, "sources.tsv"), "utf8")
   });
 const files = [
   "build.sh",
+  "vercel.json",
   "scripts/check-spm-links.mjs",
   "scripts/write-source-manifest.mjs",
 ];
