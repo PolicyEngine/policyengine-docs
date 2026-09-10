@@ -80,7 +80,10 @@ cat > "$build_dir/output/index.html" << 'EOF'
 EOF
 
 node "$repo_root/scripts/write-source-manifest.mjs" "$repo_root" "$build_dir" "$myst_version"
-node "$repo_root/scripts/check-spm-links.mjs" "$build_dir/output"
+for entry in "${REPOS[@]}"; do
+  IFS=':' read -r repo docs_path output_name <<< "$entry"
+  node "$repo_root/scripts/check-site-links.mjs" "$build_dir/output" "$output_name"
+done
 
 # Replace only generated site directories after every build and check succeeds.
 mkdir -p "$repo_root/dist"
