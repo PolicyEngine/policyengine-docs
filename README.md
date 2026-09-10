@@ -1,6 +1,6 @@
 # PolicyEngine Documentation
 
-Central documentation hub for PolicyEngine projects, deployed to [docs.policyengine.org](https://docs.policyengine.org).
+Central documentation hub for PolicyEngine projects, deployed to [policyengine-docs.vercel.app](https://policyengine-docs.vercel.app).
 
 ## Structure
 
@@ -15,7 +15,11 @@ This repo aggregates Jupyter Book 2 (MyST) documentation from multiple PolicyEng
 1. `build.sh` clones each source repo's docs folder
 2. Builds each with `myst build --html`
 3. Copies outputs to a unified `dist/` directory
-4. Vercel deploys `dist/` to `docs.policyengine.org`
+4. Vercel deploys `dist/` to `policyengine-docs.vercel.app`
+
+Each MyST build receives its own `BASE_URL` (for example,
+`/spm-calculator`) so navigation and assets resolve under that site's mount.
+The build checks SPM page links and assets before completing.
 
 ## Adding a new project
 
@@ -34,6 +38,7 @@ Then update the index.html in the build script.
 
 ```bash
 ./build.sh
+node scripts/check-spm-links.mjs dist
 # Then serve dist/ with any static server
 ```
 

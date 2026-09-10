@@ -27,7 +27,7 @@ for entry in "${REPOS[@]}"; do
 
   # Build docs
   cd "tmp_$output_name/$docs_path"
-  myst build --html
+  BASE_URL="/$output_name" myst build --html
 
   # Copy to output
   cp -r _build/html "../../dist/$output_name"
@@ -72,5 +72,7 @@ cat > dist/index.html << 'EOF'
 </body>
 </html>
 EOF
+
+node scripts/check-spm-links.mjs dist
 
 echo "Build complete! Output in dist/"
