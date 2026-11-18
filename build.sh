@@ -63,6 +63,10 @@ cat > "$build_dir/output/index.html" << 'EOF'
   <h1>PolicyEngine Documentation</h1>
   <ul>
     <li>
+      <a href="https://microcosm.institute/">Microcosm</a>
+      <div class="desc">Microdata methodology and releases</div>
+    </li>
+    <li>
       <a href="/spm-calculator/">SPM Calculator</a>
       <div class="desc">Calculate Supplemental Poverty Measure thresholds</div>
     </li>
@@ -71,8 +75,8 @@ cat > "$build_dir/output/index.html" << 'EOF'
       <div class="desc">Weighted pandas DataFrames for survey microdata analysis</div>
     </li>
     <li>
-      <a href="/policyengine-uk-data/">PolicyEngine UK Data</a>
-      <div class="desc">UK microsimulation data documentation</div>
+      <a href="/policyengine-uk-data/">Legacy UK microdata</a>
+      <div class="desc">Documentation for earlier Family Resources Survey releases</div>
     </li>
   </ul>
 </body>
