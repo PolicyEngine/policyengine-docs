@@ -4,11 +4,13 @@ Central documentation hub for PolicyEngine projects, deployed to [policyengine-d
 
 ## Structure
 
+For microdata methodology and releases, see [Microcosm](https://microcosm.institute/).
+
 This repo aggregates Jupyter Book 2 (MyST) documentation from multiple PolicyEngine repositories:
 
 - `/spm-calculator/` - SPM Threshold Calculator
 - `/microdf/` - Weighted DataFrames for survey microdata
-- `/policyengine-uk-data/` - UK microsimulation data
+- `/policyengine-uk-data/` - Legacy UK microsimulation data documentation
 
 ## How it works
 
